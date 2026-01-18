@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Web Services | Digital Marketing Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary: #0066cc;
+            --secondary: #00a8ff;
+            --dark: #003366;
+            --light: #f0f8ff;
+            --gray: #f5f7fa;
+            --text: #333333;
+            --border: #e1e8ed;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #fff;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-menu {
+            display: flex;
+        }
+        
+        .nav-menu li {
+            margin-left: 30px;
+        }
+        
+        .nav-menu a {
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 102, 204, 0.8)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: var(--gray);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-icon {
+            background-color: var(--light);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .service-icon i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+        
+        .contact-details {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: var(--secondary);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h4,
+        .footer-services h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h4::after,
+        .footer-services h4::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: 0;
+            left: 0;
+        }
+        
+        .footer-links ul li,
+        .footer-services ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a:hover,
+        .footer-services a:hover {
+            color: var(--secondary);
+            padding-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Legal Pages */
+        .legal-content {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 30px;
+            background-color: white;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+        
+        .legal-content h1 {
+            color: var(--dark);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--secondary);
+        }
+        
+        .legal-content h2 {
+            color: var(--dark);
+            margin: 25px 0 15px;
+        }
+        
+        .legal-content h3 {
+            color: var(--dark);
+            margin: 20px 0 10px;
+        }
+        
+        .legal-content p {
+            margin-bottom: 15px;
+        }
+        
+        .legal-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .legal-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 20px 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-menu li {
+                margin: 15px 0;
+            }
+            
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .legal-content {
+                margin: 120px 20px 50px;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">Ocean <span>Web Services</span></a>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Digital Marketing Solutions for Global Businesses</h1>
+            <p>Ocean Web Services provides cutting-edge digital marketing strategies to help businesses in India, USA, and Canada grow their online presence, drive traffic, and increase conversions.</p>
+            <a href="#contact" class="btn">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer comprehensive digital marketing solutions tailored to your business needs across multiple countries.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>SEO Optimization</h3>
+                        <p>Improve your website's visibility on search engines with our proven SEO strategies that work for Indian, US, and Canadian markets.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-ad"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>PPC Advertising</h3>
+                        <p>Run targeted ad campaigns on Google, Facebook, and other platforms to reach your ideal customers in specific geographic locations.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Social Media Marketing</h3>
+                        <p>Engage with your audience on platforms like Facebook, Instagram, LinkedIn, and Twitter with tailored content strategies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>About Ocean Web Services</h3>
+                    <p>Ocean Web Services is a registered digital marketing agency based in Jalandhar, India, with expertise in serving clients across India, the United States, and Canada. Our team of experts understands the unique market dynamics and consumer behaviors in these regions.</p>
+                    <p>We combine data-driven strategies with creative approaches to help businesses achieve their digital marketing goals. Our services are tailored to work effectively across different time zones and cultural contexts.</p>
+                    <a href="#contact" class="btn btn-secondary">Contact Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80" alt="Ocean Web Services Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team to discuss your digital marketing needs</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Ocean Web Services</h3>
+                    <p>We're here to help your business grow with effective digital marketing strategies tailored for Indian, US, and Canadian markets.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Our Address</h4>
+                                <p>29, Golden Ave Phase 2, Jalandhar, 144005, India</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone Number</h4>
+                                <p>+1 (808) 649-3008</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email Address</h4>
+                                <p>info@oceanwebservices.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="text" placeholder="Your Country (India/US/Canada)">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Ocean <span>Web Services</span></div>
+                    <p>Providing digital marketing solutions for businesses in India, USA, and Canada since 2020. Registered in India.</p>
+                    <a href="#contact" class="btn">Get In Touch</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-services">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="#services">SEO Optimization</a></li>
+                        <li><a href="#services">PPC Advertising</a></li>
+                        <li><a href="#services">Social Media Marketing</a></li>
+                        <li><a href="#services">Content Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPrivacyPolicy()">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showTerms()">Terms & Conditions</a></li>
+                        <li><a href="#" onclick="showDisclaimer()">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Ocean Web Services. All rights reserved. | Registered in India</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Legal Pages Content (Hidden by default) -->
+    <div id="legal-content" style="display: none;">
+        <!-- This content will be populated dynamically -->
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileToggle.innerHTML = navMenu.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                mobileToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+        
+        // Legal Pages Content
+        const privacyPolicyContent = `
+            <div class="legal-content">
+                <h1>Privacy Policy</h1>
+                <p>Last updated: October 15, 2025</p>
+                
+                <p>Ocean Web Services ("us", "we", or "our") operates the website (the "Service"). This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our Service and the choices you have associated with that data.</p>
+                
+                <h2>Information Collection and Use</h2>
+                <p>We collect several different types of information for various purposes to provide and improve our Service to you.</p>
+                
+                <h3>Types of Data Collected</h3>
+                <p><strong>Personal Data:</strong> While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you ("Personal Data"). Personally identifiable information may include, but is not limited to:</p>
+                <ul>
+                    <li>Email address</li>
+                    <li>First name and last name</li>
+                    <li>Phone number</li>
+                    <li>Address, State, Province, ZIP/Postal code, City</li>
+                    <li>Cookies and Usage Data</li>
+                </ul>
+                
+                <h3>Use of Data</h3>
+                <p>Ocean Web Services uses the collected data for various purposes:</p>
+                <ul>
+                    <li>To provide and maintain the Service</li>
+                    <li>To notify you about changes to our Service</li>
+                    <li>To allow you to participate in interactive features of our Service when you choose to do so</li>
+                    <li>To provide customer care and support</li>
+                    <li>To provide analysis or valuable information so that we can improve the Service</li>
+                    <li>To monitor the usage of the Service</li>
+                    <li>To detect, prevent and address technical issues</li>
+                </ul>
+                
+                <h2>Security of Data</h2>
+                <p>The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.</p>
+                
+                <h2>Service Providers</h2>
+                <p>We may employ third party companies and individuals to facilitate our Service ("Service Providers"), to provide the Service on our behalf, to perform Service-related services or to assist us in analyzing how our Service is used.</p>
+                
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Privacy Policy, please contact us:</p>
+                <ul>
+                    <li>By email: privacy@oceanwebservices.com</li>
+                    <li>By phone: +1 (808) 649-3008</li>
+                    <li>By mail: 29, Golden Ave Phase 2, Jalandhar, 144005, India</li>
+                </ul>
+            </div>
+        `;
+        
+        const termsContent = `
+            <div class="legal-content">
+                <h1>Terms and Conditions</h1>
+                <p>Last updated: October 15, 2025</p>
+                
+                <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the Ocean Web Services website (the "Service") operated by Ocean Web Services ("us", "we", or "our").</p>
+                
+                <p>Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.</p>
+                
+                <h2>Accounts</h2>
+                <p>When you create an account with us, you must provide us information that is accurate, complete, and current at all times. Failure to do so constitutes a breach of the Terms, which may result in immediate termination of your account on our Service.</p>
+                
+                <h2>Intellectual Property</h2>
+                <p>The Service and its original content, features and functionality are and will remain the exclusive property of Ocean Web Services and its licensors. The Service is protected by copyright, trademark, and other laws of both India and foreign countries. Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of Ocean Web Services.</p>
+                
+                <h2>Links To Other Web Sites</h2>
+                <p>Our Service may contain links to third-party web sites or services that are not owned or controlled by Ocean Web Services.</p>
+                <p>Ocean Web Services has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that Ocean Web Services shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with use of or reliance on any such content, goods or services available on or through any such web sites or services.</p>
+                
+                <h2>Termination</h2>
+                <p>We may terminate or suspend access to our Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                
+                <h2>Governing Law</h2>
+                <p>These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions.</p>
+                <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
+                
+                <h2>Changes</h2>
+                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                
+                <h2>Contact Us</h2>
+                <p>If you have any questions about these Terms, please contact us:</p>
+                <ul>
+                    <li>By email: legal@oceanwebservices.com</li>
+                    <li>By phone: +1 (808) 649-3008</li>
+                    <li>By mail: 29, Golden Ave Phase 2, Jalandhar, 144005, India</li>
+                </ul>
+            </div>
+        `;
+        
+        const disclaimerContent = `
+            <div class="legal-content">
+                <h1>Disclaimer</h1>
+                <p>Last updated: October 15, 2025</p>
+                
+                <h2>Professional Disclaimer</h2>
+                <p>The information contained on the Ocean Web Services website (the "Service") is for general information purposes only. Ocean Web Services assumes no responsibility for errors or omissions in the contents on the Service.</p>
+                <p>In no event shall Ocean Web Services be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. Ocean Web Services reserves the right to make additions, deletions, or modification to the contents on the Service at any time without prior notice.</p>
+                
+                <h2>External Links Disclaimer</h2>
+                <p>The Service may contain links to external websites that are not provided or maintained by or in any way affiliated with Ocean Web Services. Please note that Ocean Web Services does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.</p>
+                
+                <h2>Results Disclaimer</h2>
+                <p>Ocean Web Services makes no guarantees regarding specific results from the use of our digital marketing services. Results may vary based on individual circumstances, market conditions, and other factors beyond our control. Any case studies, examples, or testimonials on our website are not guarantees that you will achieve the same results.</p>
+                
+                <h2>Financial Disclaimer</h2>
+                <p>Ocean Web Services does not provide financial advice. The information provided on our website and through our services is for informational purposes only and should not be considered financial advice. You should consult with a financial professional before making any financial decisions.</p>
+                
+                <h2>Testimonials Disclaimer</h2>
+                <p>The Service may contain testimonials by users of our services. These testimonials reflect the real-life experiences and opinions of such users. However, the experiences are personal to those particular users, and may not necessarily be representative of all users of our services. We do not claim, and you should not assume, that all users will have the same experiences.</p>
+                
+                <h2>Contact Us</h2>
+                <p>If you have any questions about this Disclaimer, please contact us:</p>
+                <ul>
+                    <li>By email: legal@oceanwebservices.com</li>
+                    <li>By phone: +1 (808) 649-3008</li>
+                    <li>By mail: 29, Golden Ave Phase 2, Jalandhar, 144005, India</li>
+                </ul>
+            </div>
+        `;
+        
+        // Functions to show legal pages
+        function showPrivacyPolicy() {
+            document.getElementById('legal-content').innerHTML = privacyPolicyContent;
+            document.getElementById('legal-content').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function showTerms() {
+            document.getElementById('legal-content').innerHTML = termsContent;
+            document.getElementById('legal-content').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        function showDisclaimer() {
+            document.getElementById('legal-content').innerHTML = disclaimerContent;
+            document.getElementById('legal-content').style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+        
+        // Close legal content when clicking outside
+        document.addEventListener('click', function(e) {
+            const legalContent = document.getElementById('legal-content');
+            if (legalContent.style.display === 'block' && !legalContent.contains(e.target) && 
+                !e.target.matches('[onclick*="showPrivacyPolicy"], [onclick*="showTerms"], [onclick*="showDisclaimer"]')) {
+                legalContent.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
